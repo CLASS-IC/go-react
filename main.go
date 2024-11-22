@@ -19,9 +19,9 @@ func main() {
 	todos := []Todo{}
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Status(200).JSON(fiber.Map{"msg": "Hello Worlds"})
+		return c.Status(200).JSON(todos)
 	})
-
+	//Create a todo
 	app.Post("/api/todos", func(c *fiber.Ctx) error {
 		todo := &Todo{} //{id:0,completed:False,body:""}
 
@@ -37,5 +37,16 @@ func main() {
 		return c.Status(201).JSON(todo)
 	})
 
+	app.Patch("/api/todos/:id", func(c *fiber.Ctx) error {
+		id := c.Params("id") // id here is = to the id param passed in url
+		for i, todo := range todos {
+			if fmt.Sprint(todo.ID) == id {
+				todos[i].Completed = true
+				return c.Status(200).JSON(todos[i])
+			}
+		}
+		return c.Status(404).JSON(fiber.Map{"error": "todo is not found "})
+
+	})
 	log.Fatal(app.Listen(":4000"))
 }
