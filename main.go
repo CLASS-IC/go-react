@@ -36,7 +36,7 @@ func main() {
 		todos = append(todos, *todo)
 		return c.Status(201).JSON(todo)
 	})
-
+	//update a todo
 	app.Patch("/api/todos/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id") // id here is = to the id param passed in url
 		for i, todo := range todos {
@@ -47,6 +47,17 @@ func main() {
 		}
 		return c.Status(404).JSON(fiber.Map{"error": "todo is not found "})
 
+	})
+	//Delete a todo
+	app.Delete("/api/todos/delete/:id", func(c *fiber.Ctx) error {
+		id := c.Params("id")
+		for i, todo := range todos {
+			if fmt.Sprint(todo.ID) == id {
+				todos = append(todos[:i], todos[i+1:]...)
+				return c.Status(200).JSON(todos)
+			}
+		}
+		return c.Status(404).JSON(fiber.Map{"error": "todo is not found "})
 	})
 	log.Fatal(app.Listen(":4000"))
 }
