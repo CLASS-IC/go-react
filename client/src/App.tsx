@@ -2,6 +2,7 @@
 import {Container, Stack} from "@chakra-ui/react";
 import Navbar from "@/components/Navbar.tsx";
 import TodoForm from "@/components/TodoForm.tsx";
+import TodoList from "@/components/TodoList.tsx";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <Navbar />
         <Container>
             <TodoForm />
-            {/*<TodoList />*/}
+            <TodoList />
         </Container>
     </Stack>
   );
