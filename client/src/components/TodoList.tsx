@@ -2,6 +2,12 @@ import { Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import TodoItem from "./TodoItem";
 
+export type Todo = {
+	_id: number;
+	body: string;
+	completed: boolean;
+}
+
 const TodoList = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const todos = [
@@ -28,7 +34,8 @@ const TodoList = () => {
 	];
 	return (
 		<>
-			<Text fontSize={"4xl"} textTransform={"uppercase"} fontWeight={"bold"} textAlign={"center"} my={2}>
+			<Text fontSize={"4xl"} textTransform={"uppercase"} fontWeight={"bold"} textAlign={"center"} my={2}
+			>
 				Today's Tasks
 			</Text>
 			{isLoading && (
