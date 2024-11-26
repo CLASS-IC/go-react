@@ -1,8 +1,13 @@
 import { Badge, Box, Flex, Text } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useColorModeValue } from "@/components/ui/color-mode"
 
 const TodoItem = ({ todo }: { todo: any }) => {
+	const badgeBg = todo.completed
+		? useColorModeValue("green.300", "green.300")
+		: useColorModeValue("yellow.200", "yellow.200");
+	const badgeColor = useColorModeValue("white", "black");
 	return (
 		<Flex gap={2} alignItems={"center"}>
 			<Flex
@@ -13,21 +18,21 @@ const TodoItem = ({ todo }: { todo: any }) => {
 				p={2}
 				borderRadius={"lg"}
 				justifyContent={"space-between"}
-				bg={"gray.800"} // Ensure background contrasts with border
+				bg={useColorModeValue("white", "gray.800")} // Ensure background contrasts with border
 			>
 				<Text
-					color={todo.completed ? "green.200" : "yellow.100"}
+					color={todo.completed ? "green.300" : "yellow.200"}
 					textDecoration={todo.completed ? "line-through" : "none"}
 				>
 					{todo.body}
 				</Text>
 				{todo.completed && (
-					<Badge ml='1' colorScheme='green'>
+					<Badge bg={badgeBg} color={badgeColor}>
 						Done
 					</Badge>
 				)}
 				{!todo.completed && (
-					<Badge ml='1' colorScheme='yellow'>
+					<Badge bg={badgeBg} color={badgeColor}>
 						In Progress
 					</Badge>
 				)}
