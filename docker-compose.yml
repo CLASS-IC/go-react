@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - "27017:27017"
+
+  goapp:
+    image: class1c/goapi:latest
+    platform: linux/amd64
+    container_name: goapp
+    environment:
+      MONGODB_URI: "mongodb://root:secret@mongodb:27017"
+    ports:
+      - "7001:7000"
+    depends_on:
+      - mongodb

@@ -1,0 +1,27 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+bin = "main"
+cmd = "go build -o {{.FullBin}} ."
+include_ext = ["go"]
+exclude_dir = [
+    "tmp",
+    "client",
+    "client/node_modules",
+    "src",
+    "node_modules"
+]
+
+[run]
+cmd = "{{.FullBin}}"
+
+[watcher]
+exclude_dir = [
+    "tmp",
+    "client",
+    "client/node_modules",
+    "src",
+    "node_modules"
+]
+
