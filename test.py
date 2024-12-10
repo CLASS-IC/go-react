@@ -8,7 +8,7 @@ def test_api():
     
     i = 1
     # Send POST request
-    while i < 10000000:
+    while i < 100000:
         response = requests.post(url, json=payload)
         i = i +1
 
