@@ -56,7 +56,7 @@ func main() {
 		port = "5000"
 	}
 
-	log.Fatal(app.Listen(":" + port))
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }
 
 func getTodos(c *fiber.Ctx) error {
